@@ -108,6 +108,7 @@ fn main() -> Result<()> {
                 icmp[1] = 0;
 
                 // Change the payload to get better ping times.
+                print!("sender_timestamp={timestamp:?} now={now:?}, ");
                 if let Some((encoding, timestamp)) = parsed {
                     let new_timestamp =
                         if timestamp < now && (now - timestamp) < Duration::from_millis(500) {
@@ -117,7 +118,7 @@ fn main() -> Result<()> {
                         } else {
                             // The sender's clock isn't the same as ours.
                             // Just decrease the ping time by 50ms.
-                            print!("Sender not NTP-synced");
+                            print!("Sender not NTP-synced, ");
                             timestamp + Duration::from_millis(50)
                         };
                     write_timestamp_into_payload(&mut icmp[8..], encoding, new_timestamp);
