@@ -117,6 +117,7 @@ fn main() -> Result<()> {
                         } else {
                             // The sender's clock isn't the same as ours.
                             // Just decrease the ping time by 50ms.
+                            print!("Sender not NTP-synced");
                             timestamp + Duration::from_millis(50)
                         };
                     write_timestamp_into_payload(&mut icmp[8..], encoding, new_timestamp);
