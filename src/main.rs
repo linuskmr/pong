@@ -113,8 +113,8 @@ fn main() -> Result<()> {
                     let new_timestamp =
                         if timestamp < now && (now - timestamp) < Duration::from_millis(500) {
                             // Looks like the sender is ntp-synchronized.
-                            // Calculate the arrival time, minus five milliseconds to make it somewhat realistic.
-                            now + (now - timestamp) - Duration::from_millis(5)
+                            // Half RTT
+                            now
                         } else {
                             // The sender's clock isn't the same as ours.
                             // Just decrease the ping time by 50ms.
