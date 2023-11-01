@@ -108,8 +108,8 @@ fn main() -> Result<()> {
                 icmp[1] = 0;
 
                 // Change the payload to get better ping times.
-                print!("sender_timestamp={timestamp:?} now={now:?}, ");
                 if let Some((encoding, timestamp)) = parsed {
+                    print!("sender_timestamp={timestamp:?} now={now:?}, ");
                     let new_timestamp =
                         if timestamp < now && (now - timestamp) < Duration::from_millis(500) {
                             // Looks like the sender is ntp-synchronized.
